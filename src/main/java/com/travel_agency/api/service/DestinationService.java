@@ -12,17 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DestinationService {
     private final DestinationRepository destinationRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Destination findById(UUID id) {
         return this.destinationRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(
-                        String.format("The destination id %s was not found", id)));
+                () -> new EntityNotFoundException(String.format("The Destination id %s was not found", id)));
     }
 
     @Transactional
@@ -30,12 +28,12 @@ public class DestinationService {
         return this.destinationRepository.save(destination);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<Destination> findAll(Pageable pageable) {
         return destinationRepository.findAll(pageable);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<Destination> findByNameOrLocation(String name, String location, Pageable pageable) {
         return this.destinationRepository
                 .findByNameContainingIgnoreCaseOrLocationContainingIgnoreCase(

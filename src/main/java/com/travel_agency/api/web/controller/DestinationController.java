@@ -1,7 +1,9 @@
 package com.travel_agency.api.web.controller;
 
 import com.travel_agency.api.entity.Destination;
+import com.travel_agency.api.entity.Review;
 import com.travel_agency.api.service.DestinationService;
+import com.travel_agency.api.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,11 +19,20 @@ import java.util.UUID;
 @RequestMapping("api/v1/destinations")
 public class DestinationController {
     private final DestinationService destinationService;
+    private final ReviewService reviewService;
 
     @PostMapping()
-    public ResponseEntity<Destination> create(@RequestBody Destination data) {
+    public ResponseEntity<Destination> createDestination(@RequestBody Destination data) {
         Destination destination = this.destinationService.create(data);
         return ResponseEntity.status(HttpStatus.CREATED).body(destination);
+    }
+
+    @PostMapping("/{id}/reviews")
+    public ResponseEntity<Review> createReview(@PathVariable UUID id, @RequestBody Review data) {
+        Destination destination = this.destinationService.findById(id);
+        data.setDestination(destination);
+        Review review = reviewService.create(data);
+        return ResponseEntity.status(HttpStatus.CREATED).body(review);
     }
 
     @GetMapping("/{id}")
@@ -49,9 +60,22 @@ public class DestinationController {
         return ResponseEntity.ok(destinations);
     }
 
+    @PatchMapping("/reviews/{id}")
+    public ResponseEntity<Review> updateReview(@PathVariable UUID id, @RequestBody Review data) {
+        Review review = this.reviewService.update(id, data);
+        return ResponseEntity.ok().body(review);
+    }
+
+    @DeleteMapping("/reviews/{id}")
+    public ResponseEntity<Void> deleteReview(@PathVariable UUID id) {
+        this.reviewService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id ) {
+    public ResponseEntity<Void> deleteDestination(@PathVariable UUID id) {
         this.destinationService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 }
