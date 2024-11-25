@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * Entity representing a destination Rating.
+ * Entity representing a destination Review.
  */
 
 @Entity
