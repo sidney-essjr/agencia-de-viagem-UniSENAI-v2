@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: api
-
-  # LOCALE ------------
-  web:
-    locale.resolver: fixed
-    locale: pt_BR
-
