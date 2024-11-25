@@ -18,7 +18,8 @@ public interface DestinationRepository extends JpaRepository<Destination, UUID> 
      * @param pageable The pagination configuration.
      * @return A pageable list of destinations with the given name or location.
      */
-    Page<Destination> findByNameContainingIgnoreCaseOrLocationContainingIgnoreCase(String name, String location, Pageable pageable);
+    Page<Destination> findByNameContainingIgnoreCaseOrLocationContainingIgnoreCase(
+            String name, String location, Pageable pageable);
 
 
 }
