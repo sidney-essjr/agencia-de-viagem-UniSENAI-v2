@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ public class Destination {
     private int ratingNumber;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Review reviews;
+    private List<Review> reviews;
 
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;
