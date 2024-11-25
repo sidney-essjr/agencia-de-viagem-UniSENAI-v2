@@ -15,11 +15,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "Destinations")
 public class Destination {
 
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private UUID id;
 
     @Column(length = 100, nullable = false)
@@ -37,26 +39,15 @@ public class Destination {
     @Column(name = "rating_number")
     private int ratingNumber;
 
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Review reviews;
+
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;
 
     @PrePersist
     protected void prePersist() {
-        if(this.registrationDate == null) {
             this.registrationDate = LocalDate.now();
-        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Destination that = (Destination) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }

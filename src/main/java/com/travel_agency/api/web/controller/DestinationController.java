@@ -2,7 +2,6 @@ package com.travel_agency.api.web.controller;
 
 import com.travel_agency.api.entity.Destination;
 import com.travel_agency.api.service.DestinationService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
