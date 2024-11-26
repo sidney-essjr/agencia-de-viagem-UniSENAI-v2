@@ -31,7 +31,13 @@ public class DestinationController {
     public ResponseEntity<Review> createReview(@PathVariable UUID id, @RequestBody Review data) {
         Destination destination = this.destinationService.findById(id);
         data.setDestination(destination);
+
         Review review = reviewService.create(data);
+
+        //Recalculate rating average and save updated target
+        destination.calculateAverage();
+        this.destinationService.create(destination);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(review);
     }
 

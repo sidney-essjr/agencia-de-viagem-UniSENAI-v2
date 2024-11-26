@@ -13,10 +13,11 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "Reviews")
-public class Review{
+public class Review {
 
     @Id
     @GeneratedValue
@@ -38,7 +39,7 @@ public class Review{
 
     @PrePersist
     protected void prePersist() {
-            this.evaluateDate = LocalDate.now();
+        this.evaluateDate = LocalDate.now();
     }
 
 }

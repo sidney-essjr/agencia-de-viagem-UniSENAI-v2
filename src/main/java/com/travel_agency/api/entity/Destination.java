@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -15,7 +14,8 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter @Setter @ToString
+@Getter
+@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "Destinations")
 public class Destination {
@@ -48,7 +48,20 @@ public class Destination {
 
     @PrePersist
     protected void prePersist() {
-            this.registrationDate = LocalDate.now();
+        this.registrationDate = LocalDate.now();
     }
 
+    public void calculateAverage() {
+        if (reviews == null || reviews.isEmpty()) {
+            this.ratingAverage = 0;
+            this.ratingNumber = 0;
+            return;
+        }
+
+        int totalRatings = reviews.stream()
+                .mapToInt(Review::getRating)
+                .sum();
+        this.ratingNumber = reviews.size();
+        this.ratingAverage = (float) totalRatings / ratingNumber;
+    }
 }
