@@ -3,7 +3,7 @@ package com.travel_agency.api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -21,15 +21,26 @@ public class TravelPackage {
 
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destination_id", nullable = false)
     private Destination destination;
 
-    @Column(name = "reservation_date", nullable = false)
-    private LocalDate reservationDate;
+    @OneToMany(mappedBy = "travelPackage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reservation> reservations;
 
-    @Column(name = "number_of_people", nullable = false)
-    private int numberOfPeople;
+    @Column(length = 100, nullable = false)
+    private String name;
+
+    @Column(length = 500)
+    private String description;
+
+    @Column(nullable = false)
+    private float price;
+
+    @Column(nullable = false)
+    private boolean isAvailable = true;
+
 }

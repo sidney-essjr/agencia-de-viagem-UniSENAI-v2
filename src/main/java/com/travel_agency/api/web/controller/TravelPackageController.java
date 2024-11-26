@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(name = "api/v1/packages")
+@RequestMapping("api/v1/packages")
 public class TravelPackageController {
     private final TravelPackageService travelPackageService;
 

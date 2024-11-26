@@ -23,13 +23,13 @@ public class TravelPackageService {
         return this.travelPackageRepository.save(data);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public TravelPackage findById(UUID id) {
         return this.travelPackageRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String.format("The Travel Package id %s was not found", id)));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<TravelPackage> findAll(Pageable pageable) {
         return this.travelPackageRepository.findAll(pageable);
     }
