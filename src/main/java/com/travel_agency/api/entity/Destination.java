@@ -1,5 +1,6 @@
 package com.travel_agency.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,11 +41,9 @@ public class Destination {
     @Column(name = "rating_number")
     private int ratingNumber;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviews;
-
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TravelPackage> packages;
 
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;

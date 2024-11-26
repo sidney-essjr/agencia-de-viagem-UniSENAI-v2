@@ -1,5 +1,6 @@
 package com.travel_agency.api.service;
 
+import com.travel_agency.api.entity.Destination;
 import com.travel_agency.api.entity.Review;
 import com.travel_agency.api.repository.ReviewRepository;
 import com.travel_agency.api.web.utils.Utils;
@@ -18,7 +19,8 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
 
     @Transactional
-    public Review create(Review data) {
+    public Review create(Destination destination, Review data) {
+        data.setDestination(destination);
         return this.reviewRepository.save(data);
     }
 
