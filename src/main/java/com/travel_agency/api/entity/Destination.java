@@ -43,6 +43,9 @@ public class Destination {
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviews;
 
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TravelPackage> packages;
+
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;
 
