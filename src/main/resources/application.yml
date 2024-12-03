@@ -1,26 +1,11 @@
 spring:
   application:
     name: api
+  profiles:
+    active: dev
 
   # LOCALE ------------
   web:
     locale.resolver: fixed
     locale: pt_BR
 
-  #DATABASE
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: db_user
-    password: db_password
-
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
