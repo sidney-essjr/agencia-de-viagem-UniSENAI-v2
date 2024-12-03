@@ -29,7 +29,7 @@ public class UserService {
         UserEntity user = new UserEntity();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRoles(Set.of("ROLE_USER")); // Adiciona os papéis (roles) necessários
+        user.setRoles(Set.of("USER")); // Adiciona os papéis (roles) necessários
 
         return userRepository.save(user);
     }
