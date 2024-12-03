@@ -75,7 +75,7 @@ docker-compose up -d
 
 ### Interface gráfica pgAdmin
 
-```json
+```bash
 URL: [http://localhost:5050](http://localhost:5050)
 E-mail: admin@pgadmin.com
 Senha: admin
@@ -90,7 +90,7 @@ Senha: secret
 
 ## Documentação - Swagger - OpenAPI
 
-```json
+```bash
 URL: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 ```
 
